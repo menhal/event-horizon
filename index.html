@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Horizon</title>
+    <meta name="description" content="Real-time Schwarzschild black hole simulator: geodesic ray tracing, Doppler-beamed accretion disk, gravitational lensing." />
+  </head>
+  <body>
+    <canvas id="view"></canvas>
+
+    <div id="hud">
+      <div class="hud-tl">
+        <div class="brand">EVENT&nbsp;HORIZON<span>SCHWARZSCHILD GEODESIC TRACER</span></div>
+        <dl class="readouts">
+          <dt>MASS</dt><dd data-f="mass">—</dd>
+          <dt>R<sub>S</sub></dt><dd data-f="rs">—</dd>
+          <dt>SPIN a*</dt><dd data-f="spin">—</dd>
+          <dt>DISK r<sub>in</sub></dt><dd data-f="isco">—</dd>
+          <dt>CAMERA r</dt><dd data-f="camR">—</dd>
+        </dl>
+      </div>
+
+      <div class="hud-bl">
+        <div class="clock">
+          <div class="clock-label">FAR-AWAY CLOCK&nbsp;<em>t</em></div>
+          <div class="clock-value" data-f="farClock">00:00:00.0</div>
+        </div>
+        <div class="clock">
+          <div class="clock-label">SHIP CLOCK&nbsp;<em>τ</em></div>
+          <div class="clock-value ship" data-f="shipClock">00:00:00.0</div>
+        </div>
+        <div class="dilation">
+          <span>dτ/dt</span>
+          <div class="bar"><i data-f="dilBar"></i></div>
+          <span data-f="camDil">1.0000</span>
+        </div>
+      </div>
+
+      <div class="hud-probe" hidden>
+        <div class="probe-title">PROBE <span data-f="probeStatus">FALLING</span></div>
+        <dl class="readouts">
+          <dt>r</dt><dd data-f="probeR">—</dd>
+          <dt>dτ/dt</dt><dd data-f="probeDil">—</dd>
+          <dt>REDSHIFT z</dt><dd data-f="probeZ">—</dd>
+          <dt>PROPER τ</dt><dd data-f="probeTau">—</dd>
+          <dt>FAR t</dt><dd data-f="probeT">—</dd>
+        </dl>
+      </div>
+
+      <div class="hud-br"><span data-f="fps">— FPS</span><span class="sep">/</span><span data-f="quality">—</span></div>
+      <div class="hint">DRAG orbit · WHEEL zoom · W/S fly in/out · P probe · C cinematic · H hide</div>
+    </div>
+
+    <aside id="panel"></aside>
+    <div id="cine-caption" hidden>EVENT HORIZON<span>press C or Esc to exit</span></div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
