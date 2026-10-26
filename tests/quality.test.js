@@ -51,6 +51,18 @@ describe('QualityController', () => {
     expect(q.upgradeWindows).toBe(6);
   });
 
+  it('ignores stalls such as a hidden tab instead of downgrading', () => {
+    const q = new QualityController({ level: 0 });
+    run(q, 60, 2);
+    for (let i = 0; i < 5; i++) {
+      q.frame(3); // tab hidden for 3 s
+      run(q, 60, 0.5);
+    }
+    run(q, 60, 3);
+    expect(q.level).toBe(0);
+    expect(q.fps).toBeCloseTo(60, 5);
+  });
+
   it('does nothing while disabled', () => {
     const q = new QualityController({ level: 0 });
     q.enabled = false;

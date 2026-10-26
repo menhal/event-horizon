@@ -1,5 +1,7 @@
 # Event Horizon
 
+![Gargantua preset: lensed accretion disk with its far side arching over and under the shadow, Doppler-brightened on the approaching side](docs/screenshot.jpg)
+
 An interactive, real-time black hole simulator in Three.js and Vite. Every pixel is a light ray traced backwards along a Schwarzschild null geodesic. There are no texture files: the accretion disk, starfield, galaxy band, probe and post effects are all generated in shaders.
 
 ## Running it
@@ -117,6 +119,7 @@ Five levels (Ultra → Potato) trade render scale, maximum ray steps, step size 
 - Two windows below **50 fps** drop one level.
 - Six windows at 58 fps or more try one level up.
 - If an upgrade is followed straight away by a downgrade, the upgrade wait doubles, so the level doesn't oscillate.
+- A frame gap over 0.25 s (a hidden tab, a debugger pause) throws away the current window instead of counting as slow rendering.
 
 ## Approximations (honest list)
 - The **geodesics are Schwarzschild**. Spin moves the disk's inner edge (Kerr ISCO) and adds a weak, phenomenological frame-dragging term `∝ a* (ŷ × v)/r³` to the ray acceleration. It does not trace Kerr geodesics, so the shadow stays circular.

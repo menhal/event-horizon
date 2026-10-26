@@ -27,6 +27,7 @@ export class QualityController {
     this.window = opts.window ?? 1;
     this.downgradeWindows = opts.downgradeWindows ?? 2;
     this.upgradeWindows = opts.upgradeWindows ?? 6;
+    this.stall = opts.stall ?? 0.25;
     this.enabled = true;
     this.fps = 0;
     this._frames = 0;
@@ -43,9 +44,15 @@ export class QualityController {
 
   /**
    * Records one frame of duration dt seconds. Returns the new level index when
-   * the level changes, otherwise null.
+   * the level changes, otherwise null. A gap longer than `stall` seconds (tab
+   * hidden, debugger, window drag) discards the current measurement window.
    */
   frame(dt) {
+    if (dt > this.stall) {
+      this._frames = 0;
+      this._elapsed = 0;
+      return null;
+    }
     this._frames += 1;
     this._elapsed += dt;
     if (this._elapsed < this.window) return null;

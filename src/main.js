@@ -152,10 +152,11 @@ let last = performance.now();
 let hudTimer = 0;
 
 function frame(now) {
-  const dt = Math.min(0.1, Math.max(0, (now - last) / 1000));
+  const gap = Math.max(0, (now - last) / 1000);
+  const dt = Math.min(0.1, gap);
   last = now;
 
-  if (quality.frame(dt) !== null) bh.setQuality(quality.current);
+  if (quality.frame(gap) !== null) bh.setQuality(quality.current);
 
   const rsScale = visualScale(params.mass);
   camera.setScale(rsScale);
